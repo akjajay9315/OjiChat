@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
-import Cam from "../img/cam.png";
+import React, { useContext } from "react";
 import Add from "../img/add.png";
-import More from "../img/more.png";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
@@ -10,11 +10,6 @@ import { AuthContext } from "../context/AuthContext"; // Import AuthContext for 
 const Chat = () => {
   const { data } = useContext(ChatContext);
   const { logout } = useContext(AuthContext); // Get logout function from AuthContext
-  const [dropdownVisible, setDropdownVisible] = useState(false);
-
-  const handleMoreClick = () => {
-    setDropdownVisible(!dropdownVisible); // Toggle dropdown visibility
-  };
 
   const handleLogout = async () => {
     try {
@@ -35,13 +30,8 @@ const Chat = () => {
         <div className="chatIcons">
           {/* <img src={Cam} alt="Camera" /> */}
           <img src={Add} alt="Add" onClick={handleAddClick} />
-          <img src={More} alt="More" onClick={handleMoreClick} />
+          <button onClick={handleLogout}>Log Out</button>
         </div>
-        {dropdownVisible && (
-          <div className="dropdownMenu">
-            <button onClick={handleLogout}>Log Out</button>
-          </div>
-        )}
       </div>
       <Messages />
       <Input />

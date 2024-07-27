@@ -9,22 +9,33 @@ const Messages = () => {
   const { data } = useContext(ChatContext);
 
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
-    });
+    if (data.chatId) {
+      const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
+        doc.exists() && setMessages(doc.data().messages);
+      });
 
-    return () => {
-      unSub();
-    };
+      return () => {
+        unSub();
+      };
+    } else {
+      // Clear messages if no chat is selected
+      setMessages([]);
+    }
   }, [data.chatId]);
-
-  console.log(messages)
 
   return (
     <div className="messages">
-      {messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
+      {data.chatId ? (
+        messages.length > 0 ? (
+          messages.map((m) => <Message message={m} key={m.id} />)
+        ) : (
+          <div className="placeholderMessage">
+            Click on any friend to chat
+          </div>
+        )
+      ) : (
+        <div className="placeholderMessage">Loading..</div>
+      )}
     </div>
   );
 };
