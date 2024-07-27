@@ -390,13 +390,15 @@ body {
                         width: 60%; // Default width for images sent by the user
           
                         @include tablet {
-                          width: 80%;
-                          height: 60%; // Adjusted width for tablet screens
+                          width: 60%;
+                          // height: 60%; // Adjusted width for tablet screens
                         }
           
                         @include mobile {
-                          width: 100%;
-                          height: 70%; // Adjusted width for mobile screens
+                          // width: 80%;
+                          // height: 100%;
+                          width: 8.5rem ; 
+                          height: 5rem;// Adjusted width for mobile screens
                         }
                       }
                     }
