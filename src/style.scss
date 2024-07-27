@@ -395,8 +395,8 @@ body {
                         }
           
                         @include mobile {
-                          width: 95%;
-                          height: 60; // Adjusted width for mobile screens
+                          width: 100%;
+                          height: 70%; // Adjusted width for mobile screens
                         }
                       }
                     }
