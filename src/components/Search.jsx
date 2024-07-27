@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   collection,
   query,
@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
+
 const Search = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
@@ -19,40 +20,50 @@ const Search = () => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const handleSearch = async () => {
-    const q = query(
-      collection(db, "users"),
-      where("displayName", "==", username)
-    );
+  useEffect(() => {
+    const handleSearch = async () => {
+      if (username.trim() === "") {
+        setUser(null);
+        setErr(false);
+        return;
+      }
 
-    try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-    } catch (err) {
-      setErr(true);
-    }
-  };
+      const q = query(
+        collection(db, "users"),
+        where("displayName", "==", username)
+      );
 
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
+      try {
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          setErr(true);
+          setUser(null);
+        } else {
+          querySnapshot.forEach((doc) => {
+            setUser(doc.data());
+            setErr(false);
+          });
+        }
+      } catch (err) {
+        setErr(true);
+      }
+    };
+
+    handleSearch();
+  }, [username]);
 
   const handleSelect = async () => {
-    //check whether the group(chats in firestore) exists, if not create
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
+
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
 
       if (!res.exists()) {
-        //create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
-        //create user chats
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -71,23 +82,25 @@ const Search = () => {
           [combinedId + ".date"]: serverTimestamp(),
         });
       }
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error selecting user: ", err);
+    }
 
     setUser(null);
-    setUsername("")
+    setUsername("");
   };
+
   return (
     <div className="search">
       <div className="searchForm">
         <input
           type="text"
           placeholder="Find a user"
-          onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
           value={username}
         />
       </div>
-      {err && <span>User not found!</span>}
+      {/* {err && <span>User not found!</span>} */}
       {user && (
         <div className="userChat" onClick={handleSelect}>
           <img src={user.photoURL} alt="" />
