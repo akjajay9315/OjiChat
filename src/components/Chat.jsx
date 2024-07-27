@@ -30,7 +30,8 @@ const Chat = () => {
         <div className="chatIcons">
           {/* <img src={Cam} alt="Camera" /> */}
           <img className="add" src={Add} alt="Add" onClick={handleAddClick} />
-          <button onClick={handleLogout}>Log Out</button>
+          {/* <button onClick={handleLogout}>Log Out</button> */}
+          <button onClick={()=>signOut(auth)}>logout</button>
         </div>
       </div>
       <Messages />
