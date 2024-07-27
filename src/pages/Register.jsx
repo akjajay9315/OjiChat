@@ -52,7 +52,7 @@ const useRegister = (navigate) => {
       );
     } catch (err) {
       console.error("Error:", err.message);
-      setErr("Something went wrong. Please try again.");
+      setErr("Check email or password again. Please try again.");
     } finally {
       setLoading(false);
     }

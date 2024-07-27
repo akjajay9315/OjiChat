@@ -26,12 +26,12 @@ const Login = () => {
     <div className="formContainer">
         <div className="formWrapper">
             <span className="logo">OjiChat</span>
-            <span className="title">Register</span>
+            <span className="title">Login</span>
             <form onSubmit={handleSubmit}>
                 <input type="email" placeholder="email" />
                 <input type="password" placeholder="password" />
                 <button>Sign in</button>
-                {err && <span>Something went wrong</span>}
+                {err && <span>Chexk email or password again or Register.</span>}
             </form>
             <p>You dont't have an account? <Link to="/register">Register</Link></p>
         </div>
