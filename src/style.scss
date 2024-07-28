@@ -80,7 +80,8 @@ body {
         }
 
         @include mobile {
-          width: 200px; // Adjust input width for mobile
+          // width: 200px;
+          width:80%; // Adjust input width for mobile
         }
       }
 
@@ -156,8 +157,8 @@ body {
 
     // Adjust width and height for mobile screens
     @include mobile {
-      width: 90%;
-      height: 90%;
+      width: 100%;
+      height: 100%;
     }
 
     .sidebar {
@@ -166,7 +167,7 @@ body {
       position: relative;
 
       @include mobile {
-        width: 20%;
+        width: 35%;
       }
 
       .navbar {
@@ -203,8 +204,8 @@ body {
             object-fit: cover;
 
             @include mobile {
-              height: 20px; // Smaller size for mobile
-              width: 20px; // Smaller size for mobile
+              height: 25px; // Smaller size for mobile
+              width: 25px; // Smaller size for mobile
             }
           }
 
@@ -245,7 +246,7 @@ body {
             }
 
             @include mobile {
-              font-size: 12px; // Smaller font size for mobile
+              font-size: 14px; // Smaller font size for mobile
             }
           }
         }
@@ -280,7 +281,7 @@ body {
             font-size: 16px; // Reduced size for mobile
 
             @include mobile {
-              font-size: 12px; // Further reduced for mobile
+              font-size: 14px; // Further reduced for mobile
             }
           }
 
@@ -322,7 +323,7 @@ body {
           }
 
           @include mobile {
-            height: 28px; // Larger size for mobile
+            height: 30px; // Larger size for mobile
           }
         }
       }
@@ -360,8 +361,8 @@ body {
             font-weight: 300;
 
             img {
-              width: 40px;
-              height: 40px;
+              width: 35px;
+              height: 35px;
               border-radius: 50%;
               object-fit: cover;
             }
@@ -381,7 +382,7 @@ body {
                         font-size: 14px; // Default size
           
                         @include mobile {
-                          font-size: 12px; // Smaller font size for mobile
+                          font-size: 14px; // Smaller font size for mobile
                           padding: 8px 16px; // Adjust padding for mobile
                         }
                       }
@@ -397,7 +398,8 @@ body {
                         @include mobile {
                           // width: 80%;
                           // height: 100%;
-                          width: 8.5rem ; 
+                          width: 8.9rem ;
+                          // height: 8rem; 
                           // height: 14rem;// Adjusted width for mobile screens
                         }
                       }
@@ -469,7 +471,7 @@ body {
             cursor: pointer;
 
             @include mobile {
-              height: 20px; // Smaller size for mobile
+              height: 25px; // Smaller size for mobile
             }
           }
 
@@ -482,8 +484,8 @@ body {
             font-size: 14px; // Default font size
 
             @include mobile {
-              padding: 8px 12px; // Smaller padding for mobile
-              font-size: 12px; // Smaller font size for mobile
+              padding: 8px 11px; // Smaller padding for mobile
+              font-size: 13px; // Smaller font size for mobile
             }
           }
         }
