@@ -20,6 +20,12 @@ const useRegister = (navigate) => {
     const password = e.target.elements.password.value;
     const file = e.target.elements.file.files[0];
 
+    if (!file) {
+      setLoading(false);
+      setErr("Avatar is required.");
+      return;
+    }
+
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const date = new Date().getTime();
@@ -101,7 +107,6 @@ const Register = () => {
             type="file"
             id="file"
             style={{ display: "none" }}
-            required
             onChange={handleFileChange}
           />
           <label htmlFor="file">
